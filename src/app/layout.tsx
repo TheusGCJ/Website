@@ -1,5 +1,6 @@
 
 import "./globals.css";
+import {Saira} from 'next/font/google'
 export default function RootLayout({
   children,
 }: Readonly<{

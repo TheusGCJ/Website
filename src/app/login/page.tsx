@@ -9,7 +9,7 @@ export default function LoginPage() {
     const handleLogin = (e: React.FormEvent) =>{
         e.preventDefault();
         // Aqui você pode chamar a API para autenticar o usuário
-        if (email === "admin@gmail" && senha === "12345678") {
+        if (email === "admin@gmail.com" && senha === "12345An@") {
             alert("Login realizado com sucesso");
         } else {
             alert("Email ou senha inválidos");
@@ -18,7 +18,7 @@ export default function LoginPage() {
 
     return (
         <div style={{ maxWidth:"400px", margin: "400px auto", textAlign:"center"}}>
-        <h1 style={{margin:"5px auto", textAlign:"center", fontSize:"50px", }}>LOGIN</h1>
+        <h1 style={{margin:"5px auto", textAlign:"center", fontSize:"50px", color:"black"}}>LOGIN</h1>
         <form onSubmit={handleLogin} style={{display: "flex", flexDirection:"column", gap: "10px"}}>
             <input type="email" placeholder="Email"
             value={email}
@@ -30,12 +30,12 @@ export default function LoginPage() {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}  minLength={8} maxLength={16} required/>
 
-            <button type="submit">
+            <button type="submit" className="entrarbtn">
             Entrar  
                  </button>
              </form>
                 <p className="link">
-                    Não tem uma conta? <a href="/cadastro" target="_blank">Cadastra-se</a>
+                    Não tem uma conta? <a href="/cadastro" target="_blank" className="cadastro">Cadastra-se</a>
                 </p> 
         </div>
     );

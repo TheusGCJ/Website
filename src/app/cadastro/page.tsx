@@ -21,7 +21,7 @@ export default function cadastroPage(){
     };
     return ( 
     <div style={{ maxWidth:"400px", margin: "400px auto", textAlign:"center"}}>
-        <h1 style={{margin:"10px auto", textAlign:"center", fontSize:"50px",}}>Cadastro de {tipo}</h1>
+        <h1 style={{margin:"10px auto", textAlign:"center", fontSize:"50px", color:"black"}}>Cadastro de {tipo}</h1>
         <form onSubmit={handlecadastro} style={{ display:"flex",flexDirection:"column", gap:"10px"}}>
             <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
                 <option value="Gestor">Gestor</option>
@@ -70,7 +70,7 @@ export default function cadastroPage(){
             max={9}
             onChange={(e) => setTel(e.target.value)}
             required/>
-            <button type="submit">Enviar</button >
+            <button type="submit" className="entrarbtn">Enviar</button >
         </form>
     </div> 
         )
