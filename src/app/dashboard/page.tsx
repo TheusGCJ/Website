@@ -1,6 +1,8 @@
 "use client";
 import{ useState, useEffect } from "react";
 import styles from"./dashboard.module.css";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Link from "next/link";
 
 interface Condominio {
     
@@ -10,7 +12,22 @@ interface Condominio {
     cidade:string;
 }
 
-export default function dashboardPage(){
+interface Menu{
+    nome: string;
+    pagina?: string;
+    submenus?: Submenu[];
+}
+
+interface Submenu{
+    nome:string;
+    pagina: string;
+}
+
+interface DashboardHomeProps{
+    condominios: Condominio[];
+}
+
+export default function DashboardHome(){
     const [condominios, setCondominios] = useState<Condominio[]>([]);
 
     // Simula buscar do backend (futuro)
@@ -30,6 +47,42 @@ export default function dashboardPage(){
         email:"admin@gmail.com",
     });
 
+    const [menuAberto, setMenuAberto] = useState<string | null>(null);
+
+    const [paginaAtual, setPaginaAtual] = useState<string>("dashboard")
+
+    const menus: Menu[] =[
+        {
+            nome:"Licenças",
+            pagina:"dashboard"
+        },
+        {
+            nome:"Controle de acessos",
+           pagina:"acessos-pessoas"
+        },
+        { nome:"Novo cadastro", pagina:"novo-cadastro"},
+        {
+            nome:"Boletos",
+            submenus:[
+                {nome:"Emitir Boleto", pagina:"boletos-emitir"}, 
+                {nome:"Histórico", pagina:"boletos-historico"}
+            ],
+        },
+        {
+            nome:"Documentos",
+            submenus:[
+                {nome:"Contratos", pagina:"documentos-contratos"}, 
+                {nome:"Relatórios", pagina:"documentos-relatorios"},
+            ],
+        },
+        {
+            nome:"configurações",
+            submenus:[
+                {nome:"Usuários", pagina:"configuracoes-usuarios"},
+                {nome:"Sistema",  pagina:"configuracoes-sistema"},
+            ],
+        }, 
+    ];
     return(
         //siderBar
         <div className={styles.container}>
@@ -44,17 +97,53 @@ export default function dashboardPage(){
      
     <div className={styles.content}>
         <aside className={styles.sidebar}>
-        <nav>
-            <a href="#">Licenças</a>
-            <a href="#">Controle de acessos</a>
-            <a href="#">Cadastros</a>
-            <a href="#">Boletos</a>
-            <a href="#">Documentos</a>
-            <a href="#">Configurações</a>
-        </nav>
+            <nav>
+                 {menus.map((menu) => (
+                <div key={menu.nome}>
+                    {menu.submenus ? (
+                    <>
+                        <button
+                        className={styles.menubtn}
+                        onClick={() => {
+                            if (menu.nome ==="Licenças") {
+                                setPaginaAtual("dashboar");
+                            }
+                                setMenuAberto(menuAberto === menu.nome ? null : menu.nome);    
+                        }}
+                        >
+                        {menu.nome}{" "}
+                        {menuAberto === menu.nome ? <FaChevronUp /> : <FaChevronDown />}
+                        </button>
+                        {menuAberto === menu.nome && (
+                        <div className={styles.submenu}>
+                            {menu.submenus.map((sub, i) => (
+                            <button
+                             key={i} 
+                             className={styles.subbtn}
+                             onClick={() => setPaginaAtual(sub.pagina)}
+                            >
+                            {sub.nome}  
+                            </button>
+                            ))}
+                        </div>
+                        )}
+                    </>
+                    ) : (
+                    <button
+                    className={styles.menubtn}
+                    onClick={() => setPaginaAtual(menu.pagina || "dashboard")}
+                    >
+                        {menu.nome}
+                    </button>
+                    )}
+                </div>
+                ))}
+          </nav>
         </aside>
           {/* Seus Condomínios*/}
         <main className={styles.main}>
+        {paginaAtual === "dashboard" && ( 
+            <>
             <div className={styles.topbar}>
             <h2>Licenças</h2>
             <button className={styles.addbtn}>+ Nova</button>
@@ -65,7 +154,7 @@ export default function dashboardPage(){
             placeholder="Pesquise o nome ou código do condomínio"
             className={styles.buscar} 
              />
-                <div className={styles.cardgrid}>
+               <div className={styles.cardgrid}>
                     {condominios.map ((cond) => (
                         <div key={cond.id}  className={styles.card}>
                             <h3>{cond.nome}</h3>
@@ -75,6 +164,41 @@ export default function dashboardPage(){
                         </div>
                     ))}
                 </div>
+                </>
+                )}
+                {paginaAtual === "licencas-nova" &&(
+                    <h2> Criar nova licenças</h2>
+                )}
+                {paginaAtual === "acessos-pessoas" &&(
+                    <h2> Controle de Acesso</h2>
+                )}
+                {paginaAtual === "acessos-veiculos" &&(
+                    <h2> Controle de Veiculos</h2>
+                )}
+                {paginaAtual === "acessos-unidades" &&(
+                    <h2> Controle de Unidades</h2>
+                )}
+                {paginaAtual === "novo-cadastro" &&(
+                    <h2> Novo Cadastro</h2>
+                )}  
+                {paginaAtual === "boletos-emitir" &&(
+                    <h2> Emitir Boletos</h2>
+                )}
+                {paginaAtual === "boletos-historico" &&(
+                    <h2> Historico de Boletos</h2>
+                )}
+                {paginaAtual === "documentos-contratos" &&(
+                    <h2> Contratos</h2>
+                )}
+                {paginaAtual === "documentos-relatorios" &&(
+                    <h2> Relatórios</h2>
+                )}
+                {paginaAtual === "configuracoes-usuarios" &&(
+                    <h2> Gerenciar Usuários</h2>
+                )}
+                {paginaAtual === "configuracoes-sistema" &&(
+                    <h2> Configurações do Sistema</h2>
+                )}
         </main>
     </div>
 </div>
