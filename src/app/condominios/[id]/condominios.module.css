@@ -1,0 +1,87 @@
+.content {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    text-align: center;
+    gap: 40px;
+    box-shadow: 0px 2px 0px rgba(115, 113, 113, 0.055);
+   border-bottom: 1px solid #cccccc88;
+    padding: 8px 14px;
+    cursor: pointer;
+    margin: 0px 0px 30px 0px;
+  }
+  .tabs button{
+    background: none;
+    border: none;
+    font-size: 16px;
+}
+  .tab:hover {
+    color: #1e9a56;
+  }
+  
+  .active {
+    border-bottom: 2px solid #60b666;
+    font-weight: bold;
+  }
+  
+  .buscar{
+    margin: 15px 0px;
+    border: 2px solid #ccc;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .btn{
+    display: flex;
+    gap: 10px;
+    background: none;
+  }
+
+  .incluir{
+    background: #2bcf75;
+    color: white;
+    padding: 5px;
+    font-size: 1.0em;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    box-shadow: 0px 1px 1px rgb(79, 78, 78);
+  }
+
+  .importa{
+    background: white;
+    color: #838181;
+    padding: 5px;
+    font-size: 1.0em;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    box-shadow: 0px 1px 1px rgb(79, 78, 78);
+  }
+
+  .grid{
+    display: grid;
+    color: #1e9a56;
+    font-weight: bold;
+  }
+
+  .card {
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s;
+  }
+  
+  .card:hover {
+    transform: translateY(-3px);
+  }

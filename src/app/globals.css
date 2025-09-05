@@ -28,6 +28,10 @@ h1, h2, h3{
   color: black;
 }
 
+p{
+  color: black;
+}
+
 .cadastro{
   text-decoration: none;
   color: rgb(0, 0, 0);
@@ -39,7 +43,9 @@ h1, h2, h3{
 
 .link{
   color: black;
+  text-decoration: none;
 }
+
 
 .entrarbtn{
   padding: 8px;
